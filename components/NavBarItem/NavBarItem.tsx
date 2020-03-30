@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import {
   Collapse, List, ListItem, ListItemText,
 } from '@material-ui/core';
-import Link from 'next/link';
 import { Styled } from './_styles';
 
 interface Props {
@@ -31,11 +30,9 @@ const NavBarItem = ({ title, products }: Props) => {
         <Collapse in={open} timeout="auto" unmountOnExit>
           <Styled.NavList component="div" classes={{ root: 'nav-list-item--inner' }} disablePadding>
             {products.map((product, index) => (
-              <Link href={`${product.handle}`} key={index}>
-                <ListItem button>
-                  <ListItemText primary={product.title} />
-                </ListItem>
-              </Link>
+              <ListItem button key={index}>
+                <ListItemText primary={product.title} />
+              </ListItem>
             ))}
           </Styled.NavList>
         </Collapse>

@@ -9,6 +9,7 @@ const TsconfigPathsPlugin = require("tsconfig-paths-webpack-plugin");
 
 
 const configureWebpack = (config, { dev }) => {
+  
 	config.plugins = config.plugins || [];
 
 	config.plugins.push(
@@ -60,5 +61,5 @@ module.exports = withSass(
 		withImages({
 			webpack: configureWebpack
 		})
-	)
+  )
 );

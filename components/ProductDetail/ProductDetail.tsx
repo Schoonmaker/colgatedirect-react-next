@@ -4,44 +4,24 @@ import {
   Button, CircularProgress, Dialog, DialogContent, Typography,
 } from '@material-ui/core';
 import { useMutation, useQuery } from '@apollo/react-hooks';
-import { gql } from 'apollo-boost';
-import { LineItem, LineItemShort, TransformedProduct } from '../PDPComponent/_types';
-import {
-  CHECKOUT_LINE_ITEMS_REPLACE_MUTATION, GET_CART_QUERY, GetCartResponse, PriceV2,
-} from '../CartController/_types';
+import { LineItem, TransformedProduct } from '../PDPComponent/_types';
+import { CHECKOUT_LINE_ITEMS_REPLACE_MUTATION, GET_CART_QUERY, GetCartResponse } from '../CartController/_types';
 import { Styled } from './_styles';
-import { Metafield, ProductVariant } from '../../models';
 
 type Props = {
   product: TransformedProduct;
 };
 
 // Map line items to array for cart replacement
-export function getLineItems(lineItems): object[] {
-  if (lineItems) {
-    return lineItems.map((item): object => {
-      if (item.node) {
-        // console.log(`Item with node:`, item.node);
-        return {
-          variantId: item.node.variant.id,
-          quantity: item.node.quantity,
-        };
-      }
-      // console.log(`Item:`, item);
-      return {
-        variantId: item.id,
-        quantity: item.quantity,
-      };
-    });
-  }
-
-  return [];
+export function getLineItems(lineItems): LineItem[] {
+  return lineItems.map(({ node }): LineItem => (
+    { variantId: node.variant.id, quantity: node.quantity }
+  ));
 }
 
 const ProductDetail: FunctionComponent<Props> = ({ product }: Props) => {
   const [cartToken, setCartToken] = useState<string>(null);
   const [loading, setLoading] = useState<boolean>(false);
-  const [lineItems, setLineItems] = useState<any[]>(null);
 
   // Gets cart info to replace item if added to cart
   const {
@@ -51,7 +31,6 @@ const ProductDetail: FunctionComponent<Props> = ({ product }: Props) => {
   } = useQuery(GET_CART_QUERY, {
     variables: {
       checkoutId: cartToken,
-      lineItems: getLineItems(lineItems),
     },
   });
 
@@ -63,7 +42,9 @@ const ProductDetail: FunctionComponent<Props> = ({ product }: Props) => {
   }] = useMutation(CHECKOUT_LINE_ITEMS_REPLACE_MUTATION, {
     variables: {
       checkoutId: cartToken,
-      lineItems,
+      lineItems: getLineItems(getCartData
+        ? getCartData.node.lineItems.edges
+        : []),
     },
   });
 
@@ -73,22 +54,13 @@ const ProductDetail: FunctionComponent<Props> = ({ product }: Props) => {
   const addToCart = () => {
     if (cartToken && getCartData) {
       setLoading(true);
-      const currentItems = lineItems;
-      if (currentItems.some((item) => item.variantId === product.variant.id)) {
-        const index = currentItems.findIndex(
-          (item) => item.variantId === product.variant.id,
-        );
-        currentItems[index].quantity += 1;
-      } else {
-        currentItems.push({
-          variantId: product.variant.id,
-          quantity: 1,
-        });
-      }
-      setLineItems(currentItems);
+      getLineItems(getCartData.node.lineItems.edges).push({
+        variantId: product.variants.edges[0].node.id,
+        quantity: 1,
+      });
       replaceItems().then((res) => {
         setLoading(false);
-      }).catch((error) => console.log(error));
+      });
     } else {
       // console.log("Can't add to cart.");
     }
@@ -99,10 +71,7 @@ const ProductDetail: FunctionComponent<Props> = ({ product }: Props) => {
     if (window.localStorage) {
       setCartToken(window.localStorage.getItem('shopifyCartToken'));
     }
-    if (getCartData && !lineItems) {
-      setLineItems(getLineItems(getCartData.node.lineItems.edges));
-    }
-  }, [cartToken, getCartData, lineItems]);
+  }, [cartToken]);
 
   return (
     <Styled.ProductDetailContainer>

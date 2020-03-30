@@ -1,8 +1,4 @@
 import gql from 'graphql-tag';
-import {
-  CurrencyCode, Metafield, MetafieldConnection, ProductVariant,
-} from '../../models';
-import { PriceV2 } from '../CartController/_types';
 
 export const PRODUCT_INFO_QUERY = gql`
     query ProductDetailQuery($handle:String!){
@@ -12,7 +8,6 @@ export const PRODUCT_INFO_QUERY = gql`
                 edges {
                     node {
                         id
-                        title
                     }
                 }
             }
@@ -22,7 +17,6 @@ export const PRODUCT_INFO_QUERY = gql`
             images(first:1){
                 edges{
                     node{
-                        id
                         transformedSrc
                     }
                 }
@@ -36,32 +30,15 @@ export const PRODUCT_INFO_QUERY = gql`
     }
 `;
 
-export interface LineItemShort {
+export interface LineItem {
   variantId: string;
   quantity: number;
-}
-
-export interface LineItem {
-  node: {
-    variantId: string;
-    quantity: number;
-    id: string;
-    variant: ProductVariant;
-    title: string;
-    metafields: Metafield[];
-    priceV2: PriceV2;
-  };
 }
 
 export interface Variants {
   edges: [{
     node: {
       id: string;
-      variantId: string;
-      quantity: number;
-      variant: ProductVariant;
-      title: string;
-      metafields: Metafield[];
     };
   }];
 }
@@ -73,14 +50,7 @@ export interface TransformedProduct {
   description: string;
   imageSrc: string;
   price: string;
-  priceV2: PriceV2;
-  variants: {
-    edges: [{
-      node: ProductVariant;
-    }];
-  };
-  variant?: ProductVariant;
-  metafields?: Metafield[];
+  variants: Variants;
 }
 
 export interface ProductDetails {
@@ -104,13 +74,13 @@ export interface ProductDetails {
     priceRange: {
       minVariantPrice: {
         amount: string;
-        currencyCode: CurrencyCode;
-        currency: string;
       };
     };
     variants: {
       edges: [{
-        node: ProductVariant;
+        node: {
+          id: string;
+        };
       }];
     };
   };

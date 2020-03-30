@@ -7,19 +7,19 @@ import {
   Drawer,
   Divider,
   List,
+  ListItem, ListItemIcon, ListItemText, Collapse,
 } from '@material-ui/core';
 import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
+import FiberNewIcon from '@material-ui/icons/FiberNew';
 import { useQuery } from '@apollo/react-hooks';
-import Link from 'next/link';
-import styled from 'styled-components';
 import {
   COLLECTIONS_QUERY, Collections,
 } from './_types';
 import './_style.scss';
-import CartController from '../CartController';
+import CartController from '../CartController/CartController';
 import NavItems from './navItems.json';
-import NavBarItem, { ProductItem } from '../NavBarItem';
+import NavBarItem, { ProductItem } from '../NavBarItem/NavBarItem';
 
 type Props = {
   /** Navigation items to be displayed in NavBar */
@@ -31,14 +31,6 @@ interface NavItems {
   handle: string;
   products: ProductItem[];
 }
-
-const HomeLink = styled(Typography)`
-&&& {
-  &:hover {
-    cursor: pointer;
-  }
-}
-`;
 
 /**
  * General component description.
@@ -69,11 +61,9 @@ const NavBar: FunctionComponent<Props> = () => {
           >
             <MenuIcon />
           </IconButton>
-          <Link href="/">
-            <HomeLink variant="h6">
-              Colgate Connect
-            </HomeLink>
-          </Link>
+          <Typography variant="h6">
+            Colgate Connect
+          </Typography>
           <CartController />
         </Toolbar>
       </AppBar>
@@ -96,7 +86,7 @@ const NavBar: FunctionComponent<Props> = () => {
         { !loading && !error && data && (
         <List>
           {NavItems.navigationItems.map(({ title, products }, key) => (
-            <NavBarItem key={key} title={title} products={products} />
+            <NavBarItem title={title} products={products} />
           ))}
         </List>
         )}

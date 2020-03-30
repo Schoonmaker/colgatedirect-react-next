@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { Button, Typography } from '@material-ui/core';
+import { Typography } from '@material-ui/core';
 
 const Banner = styled.div`
   display: flex;
@@ -14,16 +14,16 @@ const Banner = styled.div`
   background-position-y: bottom;
   background-repeat: no-repeat;
   background-color: ${(props) => props.bgColor};
-  position: relative;
     
   @media (min-width: 768px) {
     align-items: center;
-    background-size: contain;
-    background-position-x: ${(props) => (props.textalign === 'left' ? 'right' : 'left')};
+    background-size: cover;
+    background-position-x: center;
   }
   
   @media (min-width: 1024px) {
-    min-height: 630px;
+    min-height: 650px;
+    background-position-y: 50%;
   }
 `;
 
@@ -57,7 +57,7 @@ const TextContainer = styled.div`
 
 const BannerTitle = styled(Typography)`
 &&& {
-  color: ${(props) => props.fontcolor};
+  color: ${(props) => props.fontColor};
   text-align: ${(props) => props.textalign};
   font-weight: 700;
 }
@@ -65,16 +65,8 @@ const BannerTitle = styled(Typography)`
 
 const BannerSubtitle = styled(Typography)`
 &&& {
-  color: ${(props) => props.fontcolor};
+  color: ${(props) => props.fontColor};
   text-align: ${(props) => props.textalign};
-}
-`;
-
-const ShopNowButton = styled(Button)`
-&&& {
-  position: absolute;
-  left: calc(50% - 45px);
-  bottom: -16px;
 }
 `;
 
@@ -84,5 +76,4 @@ export const Styled = {
   TextContainer,
   BannerTitle,
   BannerSubtitle,
-  ShopNowButton,
 };
