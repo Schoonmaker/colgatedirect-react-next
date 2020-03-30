@@ -1,3 +1,7 @@
+For Whitening page URL: localhost/whitekit (will change to products/led-whitening-device-kit in the future)
+
+
+
 <h1 align="center">React + GraphQL + Next.js + Apollo + Scss + Typescript Starter</h1>
 
 <p align="center">
