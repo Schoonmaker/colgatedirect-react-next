@@ -67,23 +67,6 @@ const PDPComponent: FunctionComponent<Props> = ({ handle }: Props) => {
               </Styled.PDPContainer>
             </PageContainer>
           )}
-          
-          // WhiteKit
-          // { product.handle === 'WhiteKit' ? (
-          //   <ManualToothbrush product={product} />
-          // ) : (
-          //   <PageContainer size={PageSize.medium} paddingTop={45}>
-          //     <Styled.PDPContainer>
-          //       <Styled.PDPMain>
-          //         <Link href="/">
-          //           <Button variant="outlined" color="secondary">Back</Button>
-          //         </Link>
-          //         <ProductDetail product={product} />
-          //       </Styled.PDPMain>
-          //     </Styled.PDPContainer>
-          //   </PageContainer>
-          // )}
-          //
         </>
       )}
     </>

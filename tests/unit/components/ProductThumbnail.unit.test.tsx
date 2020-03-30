@@ -1,4 +1,4 @@
-import ProductThumbnail, {Props} from "../../../components/ProductThumbnail";
+import Index, {Props} from "../../../components/ProductThumbnail";
 import {CurrencyCode} from "../../../models";
 import {render} from "@testing-library/react";
 import React from "react";
@@ -31,5 +31,5 @@ function renderProductThumbnail(props: Partial<Props> = {}) {
     altText: '',
   };
 
-  return render(<ProductThumbnail {...defaultProps} {...props} />);
+  return render(<Index {...defaultProps} {...props} />);
 }

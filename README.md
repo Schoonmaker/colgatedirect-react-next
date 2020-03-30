@@ -31,8 +31,6 @@
 ```javascript
 npm i
 npm run dev
-
-To view whitening page: localhost/whitekit
 ```
 ### Build docker container
 ```

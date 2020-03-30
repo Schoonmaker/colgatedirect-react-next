@@ -11,5 +11,10 @@ const routes = nextRoutes()
     name: 'ProductPage',
     pattern: '/products/:handle',
     page: 'product'
+  })
+  .add({
+    name: 'WhiteningKit',
+    pattern: '/whitekit',
+    page: 'whitekit'
   });
 export default routes;
