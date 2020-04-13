@@ -38,6 +38,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
   tabRoot: {
     marginBottom: 5,
+    minWidth: 130,
     color: '#d6d6d6',
     padding: '0 20px',
     fontSize: '1.4em',

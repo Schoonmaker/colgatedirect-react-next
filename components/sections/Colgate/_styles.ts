@@ -12,7 +12,6 @@ const ColgateBody = styled.div`
   vertical-align: baseline;
 `;
 const DescriptionWrap = styled.div`
-  margin-left: 220px;
   display: flow-root;
   text-align: left;
 `;

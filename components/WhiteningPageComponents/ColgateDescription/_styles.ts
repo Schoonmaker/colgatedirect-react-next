@@ -16,7 +16,6 @@ const ColgateTitle = styled.h1`
   margin: 0 0 0.5em;
 `;
 const DescriptionWrap = styled.div`
-  margin-left: 220px;
   display: flow-root;
 `;
 const SubtitleDiv = styled.div`

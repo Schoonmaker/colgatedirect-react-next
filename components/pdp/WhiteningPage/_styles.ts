@@ -94,10 +94,8 @@ const Img = styled.img`
   width: 50%;
 `;
 const KitImageStyle = styled.img`
-  height: 500px;
-  width: auto;
-  margin: auto;
-  margin-bottom: 0 !important;
+  display: flex;
+  width: 100%;
 `;
 const ShineImageStyle = styled.img`
   display: flex;

@@ -37,14 +37,12 @@ const ColgateDescription: FunctionComponent<ProductDetailsProps> = (props: Produ
             </Styled.WrapperAfterPay>
           </Styled.RateDiv>
           <Styled.WrapperDescription>
-            <Grid container>
-              <Styled.DesGrid item xs={12} spacing={1}>
-                <Grid item xs={6}>
+            <Grid container spacing={1}>
+              <Styled.DesGrid item container xs={12} md={12} spacing={1}>
+                <Grid item xs={12} md={6} spacing={1}>
                   <DynamicTabs items={DynamicTabsItems} />
                 </Grid>
-                <Grid item xs={1}>
-                </Grid>
-                <Grid item xs={6}>
+                <Grid item xs={12} md={6} spacing={1}>
                   <AddToCart details={props.details} />
                 </Grid>
               </Styled.DesGrid>
