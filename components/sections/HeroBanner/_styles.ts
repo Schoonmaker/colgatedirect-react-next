@@ -59,7 +59,9 @@ const BannerTitle = styled(Typography)`
 &&& {
   color: ${(props) => props.fontColor};
   text-align: ${(props) => props.textalign};
-  font-weight: 700;
+  font-weight: 900;
+  letter-spacing: -0.01em;
+  font-size: 1.25em;
 }
 `;
 
@@ -67,6 +69,7 @@ const BannerSubtitle = styled(Typography)`
 &&& {
   color: ${(props) => props.fontColor};
   text-align: ${(props) => props.textalign};
+  font-size: 0.85em;
 }
 `;
 
