@@ -23,7 +23,7 @@ function getEntry(handle, props: ManualToothbrushProps) {
           product: props.product,
         },
       };
-    case 'teeth-whitening-led-device-kit-165':
+    case 'teeth-whitening-led-device-kit':
       return {
         type: 'WhiteningPage',
         props: {
